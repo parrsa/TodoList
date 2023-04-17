@@ -1,5 +1,5 @@
-import{React,useState,useEffect,useMemo,useContext , axios , Swal,instance,Link} from '../Import/import'
-import{Paper,Table,TableBody,TableCell,TableContainer,TableHead,TableRow,TextField,Button,Container, DeleteOutline,BorderColor,ArrowBack,AddCircle} from '../Import/importmui'
+import { React, useState, useEffect, useMemo, useContext, axios, Swal, instance, Link } from '../Import/import'
+import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Button, Container, DeleteOutline, BorderColor, ArrowBack, AddCircle } from '../Import/importmui'
 import { ListTodo } from "../App";
 import { upload } from "@testing-library/user-event/dist/upload";
 
@@ -9,23 +9,23 @@ const TodoTable = () => {
   const [editing, setEditing] = useState(false)
   const [Titles, setTitle] = useState('')
   const [Dess, SetDescription] = useState('')
-  const [IdNum , setNum]=useState(null)
+  const [IdNum, setNum] = useState(null)
 
   const DeleteItem = (item) => {
     instance({
-      url:`app/todo/${item}/`,
-      method:"Delete"
-    }) .then(res => console.log(res))
+      url: `app/todo/${item}/`,
+      method: "Delete"
+    }).then(res => console.log(res))
   }
 
-  let ArrayTodo=useContext(ListTodo)
-  useEffect(()=>{
+  let ArrayTodo = useContext(ListTodo)
+  useEffect(() => {
     SetTodoList(ArrayTodo)
-  },[ArrayTodo])
+  }, [ArrayTodo])
 
   const EditeItem = (item) => {
-   setNum(item) 
-   setEditing(!editing)
+    setNum(item)
+    setEditing(!editing)
   }
 
 
@@ -35,12 +35,12 @@ const TodoTable = () => {
       description: Dess
     };
     instance({
-      url:`app/todo/${item}/`,
-      method:"patch",
-      data:data
+      url: `app/todo/${item}/`,
+      method: "patch",
+      data: data
     })
-      .then(res =>{
-        if(res.status===201){
+      .then(res => {
+        if (res.status === 201) {
           setTitle('')
           SetDescription('')
         }
@@ -48,13 +48,13 @@ const TodoTable = () => {
   }
 
   return (
-    <div style={{fontWeight:"bold" , fontFamily:"monospace"}}>
-   <Link to='/'>
-   <Button variant="outlined">
-   <ArrowBack/>
-   </Button>
-   </Link> 
-    <h1 style={{textAlign:"center" , fontSize:"35px", color:"white" , marginBottom:"20px"}}>Todo List</h1>
+    <div style={{ fontWeight: "bold", fontFamily: "monospace" }}>
+      <Link to='/'>
+        <Button variant="outlined">
+          <ArrowBack />
+        </Button>
+      </Link>
+      <h1 style={{ textAlign: "center", fontSize: "35px", color: "white", marginBottom: "20px" }}>Todo List</h1>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 600 }}>
           <TableHead>
@@ -81,10 +81,10 @@ const TodoTable = () => {
                     <DeleteOutline />
                   </TableCell>
                 </TableRow>
-                { (item.id == IdNum && editing) &&
+                {(item.id == IdNum && editing) &&
                   <div>
                     <TableRow >
-                    <TableCell>{item.id}</TableCell>
+                      <TableCell>{item.id}</TableCell>
 
                       <TableCell>
                         <TextField
@@ -104,13 +104,13 @@ const TodoTable = () => {
                         /></TableCell>
 
                       <TableCell>
-                        <Button  onClick={() => Updatae(item.id)} variant="outlined" >
+                        <Button onClick={() => Updatae(item.id)} variant="outlined" >
                           Send
                         </Button>
                       </TableCell>
 
                     </TableRow>
-                  </div> 
+                  </div>
                 }
               </>
             )
